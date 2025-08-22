@@ -1,0 +1,439 @@
+import { useState, useEffect } from "react";
+import { 
+  TrendingUp, 
+  Users, 
+  Clock, 
+  Target, 
+  BarChart3, 
+  Search, 
+  Star, 
+  Globe, 
+  Newspaper, 
+  BookOpen, 
+  ArrowRight, 
+  CheckCircle, 
+  MessageCircle, 
+  Share2, 
+  ThumbsUp 
+} from "lucide-react";
+
+const App = () => {
+  const [activeTab, setActiveTab] = useState('home');
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [stats, setStats] = useState({});
+
+  useEffect(() => {
+    // Mock stats animation
+    const timer = setTimeout(() => {
+      setStats({
+        visitors: 25000,
+        engagement: 78,
+        growth: 45,
+        retention: 92
+      });
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const features = [
+    {
+      icon: <Target className="w-8 h-8 text-blue-600" />,
+      title: "Targeted Audience",
+      description: "Reach readers who are genuinely interested in your niche and content topics."
+    },
+    {
+      icon: <Users className="w-8 h-8 text-green-600" />,
+      title: "Community Building",
+      description: "Connect with like-minded bloggers and readers to grow your network."
+    },
+    {
+      icon: <TrendingUp className="w-8 h-8 text-purple-600" />,
+      title: "Traffic Growth",
+      description: "Increase your blog traffic by 300% with our proven distribution network."
+    },
+    {
+      icon: <Clock className="w-8 h-8 text-orange-600" />,
+      title: "Time Efficiency",
+      description: "Focus on creating content while we handle the promotion and distribution."
+    }
+  ];
+
+  const benefits = [
+    "Increased blog traffic and page views",
+    "Higher engagement rates from quality readers",
+    "Improved search engine rankings",
+    "Better monetization opportunities",
+    "Access to exclusive blogging resources",
+    "Analytics and performance tracking"
+  ];
+
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "Lifestyle Blogger",
+      content: "My blog traffic increased by 400% in just 3 months. The targeted audience has been incredible for my affiliate marketing revenue.",
+      rating: 5
+    },
+    {
+      name: "Michael Chen",
+      role: "Tech Reviewer",
+      content: "Finally found a platform that understands content creators. My engagement rates have never been higher!",
+      rating: 5
+    },
+    {
+      name: "Emma Rodriguez",
+      role: "Travel Blogger",
+      content: "The community support and traffic boost helped me turn my passion into a full-time career.",
+      rating: 4
+    }
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email) {
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setEmail('');
+      }, 3000);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Navigation */}
+      <nav className="bg-white shadow-lg sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <Newspaper className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold text-gray-800">BlogBoost</span>
+            </div>
+            
+            <div className="hidden md:flex space-x-8">
+              <button 
+                onClick={() => setActiveTab('home')}
+                className={`text-sm font-medium transition-colors ${activeTab === 'home' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
+              >
+                Home
+              </button>
+              <button 
+                onClick={() => setActiveTab('features')}
+                className={`text-sm font-medium transition-colors ${activeTab === 'features' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
+              >
+                Features
+              </button>
+              <button 
+                onClick={() => setActiveTab('pricing')}
+                className={`text-sm font-medium transition-colors ${activeTab === 'pricing' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
+              >
+                Pricing
+              </button>
+              <button 
+                onClick={() => setActiveTab('blog')}
+                className={`text-sm font-medium transition-colors ${activeTab === 'blog' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'}`}
+              >
+                Blog
+              </button>
+            </div>
+
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                  Grow Your
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Blog Traffic</span>
+                  <br />Exponentially
+                </h1>
+                <p className="text-xl text-gray-600 leading-relaxed">
+                  Join thousands of successful bloggers who've increased their traffic by 300% 
+                  using our proven audience distribution network. Focus on creating amazing content 
+                  while we handle the growth.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <form onSubmit={handleSubmit} className="flex-1">
+                  <div className="flex gap-2">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all font-medium flex items-center space-x-2"
+                    >
+                      <span>Start Free</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                  {isSubmitted && (
+                    <p className="text-green-600 text-sm mt-2">Thank you! Check your email for next steps.</p>
+                  )}
+                </form>
+              </div>
+
+              <div className="flex items-center space-x-8 pt-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900">{stats.visitors || 0}K+</div>
+                  <div className="text-sm text-gray-600">Monthly Visitors</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900">{stats.engagement || 0}%</div>
+                  <div className="text-sm text-gray-600">Engagement Rate</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900">{stats.growth || 0}x</div>
+                  <div className="text-sm text-gray-600">Traffic Growth</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="bg-white rounded-2xl shadow-2xl p-8">
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                        <Search className="w-4 h-4 text-blue-600" />
+                      </div>
+                      <span className="text-gray-700">Content Discovery Network</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                        <Share2 className="w-4 h-4 text-green-600" />
+                      </div>
+                      <span className="text-gray-700">Social Media Amplification</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                        <BarChart3 className="w-4 h-4 text-purple-600" />
+                      </div>
+                      <span className="text-gray-700">Performance Analytics</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                        <MessageCircle className="w-4 h-4 text-orange-600" />
+                      </div>
+                      <span className="text-gray-700">Reader Engagement Tools</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Star className="w-5 h-5 text-yellow-300" />
+                      <span className="font-semibold">Proven Results</span>
+                    </div>
+                    <p className="text-sm opacity-90">
+                      "Average bloggers see 3x traffic increase within first 90 days"
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Powerful Features for Bloggers</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Everything you need to grow your audience and maximize your blog's potential
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+                <div className="mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-white mb-6">Why BlogBoost Works</h2>
+              <div className="space-y-4">
+                {benefits.map((benefit, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <CheckCircle className="w-5 h-5 text-green-300 flex-shrink-0" />
+                    <span className="text-white text-lg">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-2xl">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Success Story</h3>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Starting Traffic</span>
+                  <span className="font-semibold text-gray-900">5,000/mo</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-blue-600 h-2 rounded-full" style={{width: '20%'}}></div>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">After 3 Months</span>
+                  <span className="font-semibold text-gray-900">25,000/mo</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-green-600 h-2 rounded-full" style={{width: '100%'}}></div>
+                </div>
+
+                <div className="flex justify-between items-center pt-4 border-t">
+                  <span className="text-gray-600">Revenue Increase</span>
+                  <span className="font-bold text-green-600">+400%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Bloggers Say</h2>
+            <p className="text-xl text-gray-600">Real results from real bloggers</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-6 leading-relaxed">"{testimonial.content}"</p>
+                <div>
+                  <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                  <div className="text-gray-600">{testimonial.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            Ready to Transform Your Blog?
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Join over 10,000 bloggers who are growing their audience and income with BlogBoost. 
+            Start your free trial today and see results in just 30 days.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all font-semibold text-lg flex items-center space-x-2">
+              <span>Start Free Trial</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:bg-gray-50 transition-colors font-semibold text-lg">
+              Schedule Demo
+            </button>
+          </div>
+
+          <div className="mt-8 text-sm text-gray-500">
+            No credit card required • 14-day free trial • Cancel anytime
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                  <Newspaper className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xl font-bold">BlogBoost</span>
+              </div>
+              <p className="text-gray-400">
+                Helping bloggers grow their audience and income since 2018.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-4">Product</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Analytics</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-4">Resources</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Tutorials</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Community</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 BlogBoost. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
+```
